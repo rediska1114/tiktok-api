@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { generateDeviceId, generateOdinId } from '../../utils/helpers'
 import { DEFAULT_MS_TOKEN } from '../../constants/tokens'
 
@@ -63,23 +62,4 @@ export const getUserPostsParams = ({
 		webcast_language: 'en-GB',
 		msToken: msToken ?? DEFAULT_MS_TOKEN,
 	}
-}
-
-export const xttParams = (secUid: string, cursor: number, count: number) => {
-	return qs.stringify({
-		aid: '1988',
-		cookie_enabled: true,
-		screen_width: 0,
-		screen_height: 0,
-		browser_language: '',
-		browser_platform: '',
-		browser_name: '',
-		browser_version: '',
-		browser_online: '',
-		timezone_name: 'Europe/London',
-		secUid,
-		cursor,
-		count,
-		is_encryption: 1,
-	})
 }

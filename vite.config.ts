@@ -25,11 +25,8 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'axios',
-        'cheerio',
-        'qs',
         'async-retry',
         'https-proxy-agent',
-        'crypto',
       ],
       output: [
         {
