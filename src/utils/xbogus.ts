@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as crypto from 'crypto';
+import { createHash } from 'crypto';
 
 /* ── CONSTANTS ────────────────────────────────────────── */
 const STANDARD_B64_ALPHABET =
@@ -23,7 +23,7 @@ function customB64Encode(buf: Buffer) {
   for (const ch of b64) out += ENC_TRANS.get(ch) ?? ch; // '=' / newlines pass through
   return out;
 }
-const stdMd5Enc = (data: Buffer) => crypto.createHash('md5').update(data).digest();
+const stdMd5Enc = (data: Buffer) => createHash('md5').update(data).digest();
 
 /* pure-JS RC4 (KSA + PRGA) */
 function rc4Enc(keyBuf: Buffer, plaintextBuf: Buffer) {

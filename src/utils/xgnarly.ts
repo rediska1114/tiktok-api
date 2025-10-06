@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import * as crypto from 'crypto';
+import { createHash, randomInt } from 'crypto';
 
 /* ── CONSTANTS ────────────────────────────────────────── */
 const aa = [
@@ -33,9 +33,9 @@ function initPrngState() {
     aa[50]!,
     aa[32]!,
     aa[0]! & nowMs,
-    crypto.randomInt(aa[77]!),
-    crypto.randomInt(aa[77]!),
-    crypto.randomInt(aa[77]!),
+    randomInt(aa[77]!),
+    randomInt(aa[77]!),
+    randomInt(aa[77]!),
   ];
 }
 let kt = initPrngState();           // 16-word ChaCha state (global)
@@ -173,9 +173,9 @@ function encrypt(
   const obj = new Map<number, string | number>();
   obj.set(1, 1);
   obj.set(2, envcode);
-  obj.set(3, crypto.createHash('md5').update(queryString).digest('hex'));
-  obj.set(4, crypto.createHash('md5').update(body).digest('hex'));
-  obj.set(5, crypto.createHash('md5').update(userAgent).digest('hex'));
+  obj.set(3, createHash('md5').update(queryString).digest('hex'));
+  obj.set(4, createHash('md5').update(body).digest('hex'));
+  obj.set(5, createHash('md5').update(userAgent).digest('hex'));
   obj.set(6, Math.floor(timestampMs / 1000));
   obj.set(7, 1508145731);
   obj.set(8, (timestampMs * 1000) % 2147483648);

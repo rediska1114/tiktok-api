@@ -27,6 +27,7 @@ export default defineConfig({
         'axios',
         'async-retry',
         'https-proxy-agent',
+        'crypto',
       ],
       output: [
         {
