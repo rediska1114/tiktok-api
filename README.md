@@ -24,7 +24,7 @@ npm install axios async-retry https-proxy-agent
 import { getUser, getUserPosts, getChallenge } from '@rediska1114/tiktok-api';
 
 // Get user profile
-const userResult = await getUser('username');
+const userResult = await getUser('username', undefined, 'US');
 if (userResult.error) {
   console.error('Error:', userResult.error);
 } else {
@@ -38,6 +38,7 @@ const postsResult = await getUserPosts(
   userResult.data.userInfo.user.secUid,
   undefined,
   10,
+  'US',
   userResult.msToken
 );
 if (postsResult.error) {
@@ -47,7 +48,7 @@ if (postsResult.error) {
 }
 
 // Get challenge/hashtag info
-const challengeResult = await getChallenge('fyp');
+const challengeResult = await getChallenge('fyp', undefined, 'US');
 if (challengeResult.error) {
   console.error('Error:', challengeResult.error);
 } else {
@@ -72,15 +73,15 @@ getUser('username').then(userResult => {
 
 ## API
 
-### `getUser(username: string, proxy?: string, msToken?: string, region?: string)`
+### `getUser(username: string, proxy: string | undefined | null, region: string, msToken?: string)`
 
 Fetches user profile information from TikTok API.
 
 **Parameters:**
 - `username` - TikTok username (with or without @)
-- `proxy` (optional) - HTTP proxy URL
+- `proxy` - HTTP proxy URL (can be undefined or null)
+- `region` - Region code (e.g., 'GB', 'US', 'FR')
 - `msToken` (optional) - TikTok msToken for request authentication
-- `region` (optional) - Region code (default: 'GB')
 
 **Returns:** `Promise<TiktokStalkUserResponse>`
 
@@ -93,14 +94,15 @@ Fetches user profile information from TikTok API.
 }
 ```
 
-### `getUserPosts(secUid: string, proxy?: string, postLimit?: number, msToken?: string)`
+### `getUserPosts(secUid: string, proxy: string | undefined | null, postLimit: number | undefined, region: string, msToken?: string)`
 
 Fetches user posts with automatic msToken rotation.
 
 **Parameters:**
 - `secUid` - User's secure ID (obtained from `getUser`)
-- `proxy` (optional) - HTTP proxy URL
-- `postLimit` (optional) - Maximum number of posts to fetch
+- `proxy` - HTTP proxy URL (can be undefined or null)
+- `postLimit` - Maximum number of posts to fetch (can be undefined)
+- `region` - Region code (e.g., 'GB', 'US', 'FR')
 - `msToken` (optional) - TikTok msToken for request authentication (rotates automatically)
 
 **Returns:** `Promise<TiktokUserPostsResponse>`
@@ -114,15 +116,15 @@ Fetches user posts with automatic msToken rotation.
 }
 ```
 
-### `getChallenge(hashtag: string, proxy?: string, msToken?: string, region?: string)`
+### `getChallenge(hashtag: string, proxy: string | undefined | null, region: string, msToken?: string)`
 
 Fetches challenge/hashtag information from TikTok API.
 
 **Parameters:**
 - `hashtag` - Hashtag/challenge name
-- `proxy` (optional) - HTTP proxy URL
+- `proxy` - HTTP proxy URL (can be undefined or null)
+- `region` - Region code (e.g., 'GB', 'US', 'FR')
 - `msToken` (optional) - TikTok msToken for request authentication
-- `region` (optional) - Region code (default: 'GB')
 
 **Returns:** `Promise<{ error?: string; statusCode?: number; data: TiktokChallengeResponse | null }>`
 
