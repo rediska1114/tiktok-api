@@ -13,24 +13,25 @@ const DEFAULT_POST_COUNT = 16
 
 export const getUserPosts = (
 	secUid: string,
-	proxy?: string,
-	postLimit?: number,
+	proxy: string | undefined | null,
+	postLimit: number | undefined,
+	region: string,
 	msToken?: string
 ): Promise<TiktokUserPostsResponse> =>
 	new Promise(async (resolve) => {
 		try {
-			const data = await parseUserPosts(secUid, postLimit, proxy, msToken)
+			const data = await parseUserPosts(secUid, postLimit, region, proxy, msToken)
 
 			if (!data.length)
 				return resolve({
-					status: 'error',
-					code: 'USER_NOT_FOUND',
-					message: 'User not found!',
+					error: 'USER_NOT_FOUND',
+					statusCode: TiktokError.USER_NOT_EXIST,
+					data: null,
+					totalPosts: 0,
 				})
 
 			resolve({
-				status: 'success',
-				result: data,
+				data,
 				totalPosts: data.length,
 			})
 		} catch (err: any) {
@@ -40,21 +41,24 @@ export const getUserPosts = (
 				(err.response?.data && err.response.data.statusCode == TiktokError.INVALID_ENTITY)
 			) {
 				return resolve({
-					status: 'error',
-					code: 'VIDEO_NOT_FOUND',
-					message: 'Video not found!',
+					error: 'VIDEO_NOT_FOUND',
+					statusCode: TiktokError.INVALID_ENTITY,
+					data: null,
+					totalPosts: 0,
 				})
 			} else if (err.message === 'EMPTY_RESPONSE') {
 				return resolve({
-					status: 'error',
-					code: 'EMPTY_RESPONSE',
-					message: err.message || 'An unknown error occurred',
+					error: 'EMPTY_RESPONSE',
+					statusCode: 0,
+					data: null,
+					totalPosts: 0,
 				})
 			} else {
 				return resolve({
-					status: 'error',
-					code: 'UNKNOWN_ERROR',
-					message: err.message || 'An unknown error occurred',
+					error: 'UNKNOWN_ERROR',
+					statusCode: 0,
+					data: null,
+					totalPosts: 0,
 				})
 			}
 		}
@@ -62,8 +66,9 @@ export const getUserPosts = (
 
 const parseUserPosts = async (
 	secUid: string,
-	postLimit?: number,
-	proxy?: string,
+	postLimit: number | undefined,
+	region: string,
+	proxy?: string | null,
 	msToken?: string
 ): Promise<Posts[]> => {
 	// Posts Result
@@ -86,7 +91,7 @@ const parseUserPosts = async (
 					cursor: responseCursor,
 					secUid,
 					msToken: currentMsToken,
-					region: 'KZ',
+					region,
 				})
 
 				// Sign URL with X-Bogus and X-Gnarly

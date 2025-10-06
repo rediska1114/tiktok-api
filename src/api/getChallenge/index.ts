@@ -10,9 +10,9 @@ import { signUrl } from '../../utils/signUrl'
 
 export async function getChallenge(
 	hashtag: string,
-	proxy?: string,
-	msToken?: string,
-	region?: string
+	proxy: string | undefined | null,
+	region: string,
+	msToken?: string
 ): Promise<{
 	error?: string
 	statusCode?: number

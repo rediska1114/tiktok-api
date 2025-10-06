@@ -1,9 +1,8 @@
 export type TiktokUserPostsResponse = {
-  status: "success" | "error"
-  message?: string
-  code?: 'USER_NOT_FOUND' | 'VIDEO_NOT_FOUND' | 'UNKNOWN_ERROR' | 'EMPTY_RESPONSE'
-  result?: Posts[]
-  totalPosts?: number
+  error?: string
+  statusCode?: number
+  data: Posts[] | null
+  totalPosts: number
 }
 
 export type Posts = {

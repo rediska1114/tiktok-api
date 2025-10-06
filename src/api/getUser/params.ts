@@ -10,7 +10,7 @@ export const getUserParams = ({
 	username: string
 	userAgent: string
 	msToken?: string
-	region?: string
+	region: string
 }) => {
 	return {
 		WebIdLastTime: Date.now(),

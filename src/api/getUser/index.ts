@@ -11,9 +11,9 @@ import { extractMsToken } from '../../utils/helpers'
 
 export async function getUser(
 	username: string,
-	proxy?: string,
-	msToken?: string,
-	region?: string
+	proxy: string | undefined | null,
+	region: string,
+	msToken?: string
 ): Promise<TiktokStalkUserResponse> {
 	try {
 		username = username.replace('@', '')

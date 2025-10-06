@@ -10,7 +10,7 @@ export const getChallengeParams = ({
 	hashtag: string
 	userAgent: string
 	msToken?: string
-	region?: string
+	region: string
 }) => {
 	return {
 		WebIdLastTime: Date.now(),
