@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import crypto from 'crypto';
+import * as crypto from 'crypto';
 
 /* ── CONSTANTS ────────────────────────────────────────── */
 const aa = [

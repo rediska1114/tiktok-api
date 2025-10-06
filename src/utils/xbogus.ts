@@ -1,5 +1,5 @@
 /* eslint-disable */
-import crypto from 'crypto';
+import * as crypto from 'crypto';
 
 /* ── CONSTANTS ────────────────────────────────────────── */
 const STANDARD_B64_ALPHABET =
