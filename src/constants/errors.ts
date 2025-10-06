@@ -1,0 +1,13 @@
+// https://github.com/davidteather/TikTok-Api/issues/403#issuecomment-971818109
+export enum TiktokError {
+	HASHTAG_NOT_EXIST = 10205,
+	HASHTAG_BLACK_LIST = 10209,
+	HASHTAG_SENSITIVITY_WORD = 10211,
+	HASHTAG_UNSHELVE = 10212,
+
+	USER_BAN = 10221,
+	USER_PRIVATE = 10222,
+	USER_NOT_EXIST = 10202,
+
+	INVALID_ENTITY = 10201,
+}
