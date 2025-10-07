@@ -90,7 +90,7 @@ const parseUserPosts = async (
 					count: DEFAULT_POST_COUNT,
 					cursor: responseCursor,
 					secUid,
-					msToken: currentMsToken,
+					// msToken: currentMsToken, // for some reason this doesn't work now
 					region,
 				})
 
@@ -107,7 +107,7 @@ const parseUserPosts = async (
 				})
 
 				// Extract msToken from response cookies for rotation
-				const newMsToken = extractMsToken(headers['set-cookie'])
+				const newMsToken = headers['x-ms-token'] // extractMsToken(headers['set-cookie'])
 				if (newMsToken) {
 					currentMsToken = newMsToken
 				}

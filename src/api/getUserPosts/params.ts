@@ -1,6 +1,8 @@
 import { generateDeviceId, generateOdinId } from '../../utils/helpers'
 import { DEFAULT_MS_TOKEN } from '../../constants/tokens'
 
+const LANG = 'en'
+
 export const getUserPostsParams = ({
 	userAgent,
 	count,
@@ -25,9 +27,9 @@ export const getUserPostsParams = ({
 
 		WebIdLastTime: Date.now(),
 		aid: 1988,
-		app_language: 'en-GB',
+		app_language: LANG,
 		app_name: 'tiktok_web',
-		browser_language: 'en-GB',
+		browser_language: LANG,
 		browser_name: 'Mozilla',
 		browser_online: true,
 		browser_platform: 'MacIntel',
@@ -46,7 +48,7 @@ export const getUserPostsParams = ({
 		is_fullscreen: false,
 		is_page_visible: true,
 		needPinnedItemIds: true,
-		language: 'en-GB',
+		language: LANG,
 		odinId: generateOdinId(),
 		os: 'mac',
 		priority_region: '',
@@ -59,7 +61,7 @@ export const getUserPostsParams = ({
 		tz_name: 'Pacific/Auckland',
 		user_is_login: false,
 		video_encoding: 'mp4',
-		webcast_language: 'en-GB',
+		webcast_language: LANG,
 		msToken: msToken ?? DEFAULT_MS_TOKEN,
 	}
 }
